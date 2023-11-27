@@ -1,15 +1,13 @@
-import BankAccount from "./bankAccount/bank-account";
+import { ICryptoGuardian } from "./ICryptoGuardian";
+import { IBankAccount } from "../bank/IBankAccount";
 
-const account = new BankAccount(180001);
 const BITCOIN_180K = 180000;
 const PRICE_API_URL = "https://economia.awesomeapi.com.br/last/BTC-BRL";
 
-interface ICryptoGuardian {
-  executeAutomation(): Promise<void>;
-}
+export class CryptoGuardian implements ICryptoGuardian {
+  constructor(private readonly bankAccount: IBankAccount) {}
 
-class CryptoGuardian implements ICryptoGuardian {
-  private static async getBidValue(): Promise<number> {
+  private async getBidValue(): Promise<number> {
     try {
       const response = await fetch(PRICE_API_URL);
       const { BTCBRL } = await response.json();
@@ -23,11 +21,11 @@ class CryptoGuardian implements ICryptoGuardian {
 
   async executeAutomation(): Promise<void> {
     try {
-      const bidValue = await CryptoGuardian.getBidValue();
+      const bidValue = await this.getBidValue();
 
       if (bidValue <= BITCOIN_180K) {
         console.log("One more bitcoin to wallet!");
-        account.widthdrawMoney(bidValue);
+        this.bankAccount.withdrawMoney(bidValue);
       } else {
         console.log("Bid value is higher than day variation 0.86% percent.");
       }
@@ -37,6 +35,3 @@ class CryptoGuardian implements ICryptoGuardian {
     }
   }
 }
-
-const cryptoGuardianInstance = new CryptoGuardian();
-cryptoGuardianInstance.executeAutomation();
