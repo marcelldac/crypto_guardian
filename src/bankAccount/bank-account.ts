@@ -1,10 +1,10 @@
-interface IAccountOperations {
+interface IBankAccount {
   addMoney(value: number): void;
   widthdrawMoney(value: number): void;
   verifyBalance(): number;
 }
 
-class BankAccount implements IAccountOperations {
+class BankAccount implements IBankAccount {
   private balance: number;
 
   constructor(initialBalance: number) {
