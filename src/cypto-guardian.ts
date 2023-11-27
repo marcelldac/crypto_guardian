@@ -4,7 +4,11 @@ const account = new BankAccount(180001);
 const BITCOIN_180K = 180000;
 const PRICE_API_URL = "https://economia.awesomeapi.com.br/last/BTC-BRL";
 
-class CryptoGuardian {
+interface ICryptoGuardian {
+  executeAutomation(): Promise<void>;
+}
+
+class CryptoGuardian implements ICryptoGuardian {
   private static async getBidValue(): Promise<number> {
     try {
       const response = await fetch(PRICE_API_URL);
@@ -17,7 +21,7 @@ class CryptoGuardian {
     }
   }
 
-  static async executeAutomation(): Promise<void> {
+  async executeAutomation(): Promise<void> {
     try {
       const bidValue = await CryptoGuardian.getBidValue();
 
@@ -34,4 +38,5 @@ class CryptoGuardian {
   }
 }
 
-CryptoGuardian.executeAutomation();
+const cryptoGuardianInstance = new CryptoGuardian();
+cryptoGuardianInstance.executeAutomation();
