@@ -1,10 +1,11 @@
 {
-  "name": "automacao_poo",
+  "name": "crypto-guardian",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/cypto-guardian.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node ./dist/cypto-guardian.js"
   },
   "keywords": [],
   "author": "",
