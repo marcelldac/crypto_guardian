@@ -2,15 +2,25 @@ class BankAccount {
   private balance: number;
 
   constructor(initialBalance: number) {
+    if (initialBalance < 0) {
+      throw new Error("Initial balance cannot be negative.");
+    }
     this.balance = initialBalance;
   }
 
   addMoney(value: number): void {
+    if (value <= 0) {
+      throw new Error("Amount to be added must be a positive number.");
+    }
     this.balance += value;
     console.log(`Added ${value} to balance.\nNew Balance: ${this.balance}`);
   }
 
   widthdrawMoney(value: number): void {
+    if (value <= 0) {
+      throw new Error("Amount to be withdraw must be a positive number.");
+    }
+
     if (value <= this.balance) {
       this.balance -= value;
       console.log(
