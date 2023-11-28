@@ -27,7 +27,7 @@ class BankAccount implements IBankAccount {
       throw new Error("Amount to be withdraw must be a positive number.");
     }
 
-    if (value <= this.balance) {
+    if (value == this.balance) {
       this.balance -= value;
       console.log(
         `Withdrawn ${value} from balance. New balance: ${this.balance}`
