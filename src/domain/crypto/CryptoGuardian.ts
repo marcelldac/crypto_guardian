@@ -23,7 +23,7 @@ export class CryptoGuardian implements ICryptoGuardian {
     try {
       const bidValue = await this.getBidValue();
 
-      if (bidValue <= BITCOIN_180K) {
+      if (bidValue == BITCOIN_180K) {
         console.log("One more bitcoin to wallet!");
         this.bankAccount.withdrawMoney(bidValue);
       } else {
