@@ -1,8 +1,8 @@
 import { ICryptoGuardian } from "./ICryptoGuardian";
 import { IBankAccount } from "../bank/IBankAccount";
 
-const BITCOIN_180K = 180000;
-const PRICE_API_URL = "https://economia.awesomeapi.com.br/last/BTC-BRL";
+const ETHEREUM_9K = 9500;
+const PRICE_API_URL = "https://api.coinbase.com/v2/exchange-rates?currency=ETH";
 
 export class CryptoGuardian implements ICryptoGuardian {
   constructor(private readonly bankAccount: IBankAccount) {}
@@ -10,8 +10,8 @@ export class CryptoGuardian implements ICryptoGuardian {
   private async getBidValue(): Promise<number> {
     try {
       const response = await fetch(PRICE_API_URL);
-      const { BTCBRL } = await response.json();
-      const bid = parseFloat(BTCBRL.bid);
+      const { data } = await response.json();
+      const bid = parseFloat(data.rates.BRL);
       return bid;
     } catch (error) {
       console.log(error);
@@ -23,7 +23,7 @@ export class CryptoGuardian implements ICryptoGuardian {
     try {
       const bidValue = await this.getBidValue();
 
-      if (bidValue == BITCOIN_180K) {
+      if (bidValue == ETHEREUM_9K) {
         console.log("One more bitcoin to wallet!");
         this.bankAccount.withdrawMoney(bidValue);
       } else {
