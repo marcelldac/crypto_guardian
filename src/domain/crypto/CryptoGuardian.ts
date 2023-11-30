@@ -24,10 +24,10 @@ export class CryptoGuardian implements ICryptoGuardian {
       const bidValue = await this.getBidValue();
 
       if (bidValue == ETHEREUM_9K) {
-        console.log("One more bitcoin to wallet!");
+        console.log("One more ethereum to wallet!");
         this.bankAccount.withdrawMoney(bidValue);
       } else {
-        console.log("Bid value is higher than day variation 0.86% percent.");
+        console.log("Bid value is higher than informed value ");
       }
     } catch (error) {
       console.log(error);
