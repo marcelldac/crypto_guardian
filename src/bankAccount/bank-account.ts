@@ -1,10 +1,6 @@
-interface IBankAccount {
-  addMoney(value: number): void;
-  widthdrawMoney(value: number): void;
-  verifyBalance(): number;
-}
+import { IBankAccount } from "./IBankAccount";
 
-class BankAccount implements IBankAccount {
+export class BankAccount implements IBankAccount {
   private balance: number;
 
   constructor(initialBalance: number) {
@@ -22,12 +18,12 @@ class BankAccount implements IBankAccount {
     console.log(`Added ${value} to balance.\nNew Balance: ${this.balance}`);
   }
 
-  widthdrawMoney(value: number): void {
+  withdrawMoney(value: number): void {
     if (value <= 0) {
       throw new Error("Amount to be withdraw must be a positive number.");
     }
 
-    if (value == this.balance) {
+    if (value <= this.balance) {
       this.balance -= value;
       console.log(
         `Withdrawn ${value} from balance. New balance: ${this.balance}`
@@ -42,5 +38,3 @@ class BankAccount implements IBankAccount {
     return this.balance;
   }
 }
-
-export default BankAccount;
