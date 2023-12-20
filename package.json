@@ -2,10 +2,10 @@
   "name": "crypto-guardian",
   "version": "1.0.0",
   "description": "",
-  "main": "src/cypto-guardian.ts",
+  "main": "src/main.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/cypto-guardian.js"
+    "start": "node ./dist/main.js"
   },
   "keywords": [],
   "author": "",
